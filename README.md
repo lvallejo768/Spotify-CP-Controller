@@ -79,18 +79,17 @@ UART operates at **9600 baud, 8N1**.
 
 ```text
 Spotify-CP-Controller/
-|
-|-- spotify_controller.py
-|-- spotify_mac.py
-|
-|-- backends/
-|   |-- __init__.py
-|   |-- macos.py
-|   |-- windows.py
-|
-|-- requirements-macos.txt
-|-- requirements-windows.txt
-|-- README.md
+├── backends/
+│   ├── __init__.py
+│   ├── macos.py
+│   └── windows.py
+├── firmware/
+│   └── main.c
+├── spotify_controller.py
+├── spotify_mac.py
+├── requirements-macos.txt
+├── requirements-windows.txt
+└── README.md
 ```
 
 ### File Descriptions
@@ -104,7 +103,20 @@ Spotify-CP-Controller/
 | `requirements-macos.txt` | macOS Python dependencies |
 | `requirements-windows.txt` | Windows Python dependencies |
 
-**Firmware note:** The verified Code Composer Studio firmware is not yet included in this repository. The programmed MSP430FR6989 currently runs the tested embedded C implementation. The firmware will be added in a future update.
+### MSP430FR6989 Firmware
+
+The embedded C firmware is available in [`firmware/main.c`](firmware/main.c).
+
+Developed using Texas Instruments Code Composer Studio (CCS), the firmware implements:
+
+- Physical playback controls using S1 and S2
+- UART communication with the Python host application
+- Six-character LCD song-title scrolling
+- Button debouncing and GPIO interrupts
+- Automatic LPM0 and manual LPM3 power management
+- Sleep and wakeup event handling
+
+The firmware is designed for the MSP-EXP430FR6989 LaunchPad. A complete importable CCS project configuration has not yet been published.
 
 ---
 
